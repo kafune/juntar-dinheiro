@@ -1,0 +1,17 @@
+{
+  "name": "Juntar Dinheiro",
+  "short_name": "Juntar",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f8f1e7",
+  "theme_color": "#f3c77c",
+  "description": "Tabela offline para marcar depositos de 1 a 110.",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3c77c" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <title>Juntar Dinheiro</title>
+    <link rel="manifest" href="manifest.json" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">Tabela pessoal</p>
+          <h1>Juntar Dinheiro</h1>
+          <p class="lead">
+            Marque cada valor quando o deposito for feito. Sao 110 valores de 1 a 110.
+          </p>
+        </div>
+        <div class="total-card">
+          <span>Total</span>
+          <strong id="total-value">R$ 0</strong>
+          <small>Meta final</small>
+        </div>
+      </header>
+
+      <section class="summary">
+        <div class="card">
+          <span>Guardado</span>
+          <strong id="saved-value">R$ 0</strong>
+          <small id="saved-count">0/110 marcados</small>
+        </div>
+        <div class="card">
+          <span>Falta</span>
+          <strong id="remaining-value">R$ 0</strong>
+          <small id="remaining-count">110 valores restantes</small>
+        </div>
+        <div class="card progress-card">
+          <span>Progresso</span>
+          <div class="progress">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <small id="progress-label">0%</small>
+        </div>
+      </section>
+
+      <section class="grid-wrap">
+        <h2>Valores</h2>
+        <div id="grid" class="grid" role="list"></div>
+      </section>
+    </main>
+
+    <script src="app.js"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js');
+        });
+      }
+    </script>
+  </body>
+</html>
