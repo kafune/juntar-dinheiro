@@ -193,8 +193,8 @@ function suggestNumbersForDeposit(markedSet, depositValue) {
   const maxUsed = new Array(depositValue + 1).fill(Infinity);
   const prev = new Array(depositValue + 1).fill(null);
 
-  dp[0] = 0;
-  maxUsed[0] = 0;
+  dp[0] = 0; // quantidade
+  maxUsed[0] = 0; // maior número usado (queremos minimizar)
 
   const isLexicographicallyBetter = (currentSum, candidatePrevSum, candidateNumber) => {
     if (dp[currentSum] === Infinity) {
@@ -223,10 +223,10 @@ function suggestNumbersForDeposit(markedSet, depositValue) {
       const candCount = dp[sum - value] + 1;
       const candMax = Math.max(maxUsed[sum - value], value);
       const shouldReplace =
-        candCount < dp[sum] ||
-        (candCount === dp[sum] && candMax < maxUsed[sum]) ||
-        (candCount === dp[sum] &&
-          candMax === maxUsed[sum] &&
+        candMax < maxUsed[sum] ||
+        (candMax === maxUsed[sum] && candCount < dp[sum]) ||
+        (candMax === maxUsed[sum] &&
+          candCount === dp[sum] &&
           isLexicographicallyBetter(sum, sum - value, value));
 
       if (shouldReplace) {
