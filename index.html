@@ -47,38 +47,38 @@
         </div>
       </section>
 
-      <section class="card suggestion">
-        <div class="suggestion__intro">
-          <span class="micro">Depósito guiado</span>
-          <h2>Sugerir marcações para depósito</h2>
+      <section class="card manual">
+        <div class="manual__intro">
+          <span class="micro">Depósito direto</span>
+          <h2>Registrar valor sem marcar quadradinhos</h2>
           <p>
-            Informe quanto vai depositar agora e receba a combinação de números livres que soma exatamente esse valor.
+            Use quando não existir combinação possível ou quiser apenas registrar o valor total depositado.
           </p>
         </div>
-        <form class="suggestion__form" id="suggestion-form">
+        <form class="manual__form" id="manual-form">
           <label class="input-field">
-            <span>Valor do depósito (R$)</span>
+            <span>Valor a registrar (R$)</span>
             <div class="input-wrapper">
               <span class="prefix">R$</span>
               <input
-                id="deposit-input"
-                name="deposit"
+                id="manual-input"
+                name="manual"
                 type="number"
                 inputmode="numeric"
                 min="1"
                 step="1"
-                placeholder="Ex.: 25"
+                placeholder="Ex.: 90"
                 required
               />
             </div>
           </label>
-          <div class="suggestion__actions">
-            <button type="submit" id="suggest-button" class="btn primary">Sugerir números</button>
-            <button type="button" id="apply-suggestion" class="btn ghost" disabled>Marcar sugeridos</button>
+          <div class="manual__actions">
+            <button type="submit" class="btn primary">Registrar valor</button>
+            <button type="button" id="manual-reset" class="btn ghost">Zerar valores diretos</button>
           </div>
         </form>
-        <div id="suggestion-result" class="suggestion__result">
-          Nenhuma sugestão ativa. Informe um valor e clique em “Sugerir números”.
+        <div id="manual-status" class="manual__status">
+          Nenhum valor direto registrado.
         </div>
       </section>
 
