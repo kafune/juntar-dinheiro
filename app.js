@@ -189,6 +189,7 @@ function suggestNumbersForDeposit(markedSet, depositValue) {
     };
   }
 
+  // dp guarda a menor quantidade de itens; maxUsed desempata usando o menor maior número.
   const dp = new Array(depositValue + 1).fill(Infinity);
   const maxUsed = new Array(depositValue + 1).fill(Infinity);
   const prev = new Array(depositValue + 1).fill(null);
@@ -223,10 +224,10 @@ function suggestNumbersForDeposit(markedSet, depositValue) {
       const candCount = dp[sum - value] + 1;
       const candMax = Math.max(maxUsed[sum - value], value);
       const shouldReplace =
-        candMax < maxUsed[sum] ||
-        (candMax === maxUsed[sum] && candCount < dp[sum]) ||
-        (candMax === maxUsed[sum] &&
-          candCount === dp[sum] &&
+        candCount < dp[sum] ||
+        (candCount === dp[sum] && candMax < maxUsed[sum]) ||
+        (candCount === dp[sum] &&
+          candMax === maxUsed[sum] &&
           isLexicographicallyBetter(sum, sum - value, value));
 
       if (shouldReplace) {
