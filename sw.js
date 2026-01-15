@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const CACHE_NAME = `poupanca-${CACHE_VERSION}`;
 const ASSETS = [
   './',
@@ -11,7 +11,7 @@ const ASSETS = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS))
+    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS)).then(() => self.skipWaiting())
   );
 });
 
@@ -21,9 +21,9 @@ self.addEventListener('activate', (event) => {
       Promise.all(
         keys
           .filter((key) => key !== CACHE_NAME)
-          .map((key) => caches.delete(key))
+          .map((key) => caches.delete(key)),
       )
-    )
+    ).then(() => self.clients.claim())
   );
 });
 
