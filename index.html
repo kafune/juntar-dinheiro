@@ -47,6 +47,41 @@
         </div>
       </section>
 
+      <section class="card suggestion">
+        <div class="suggestion__intro">
+          <span class="micro">Depósito guiado</span>
+          <h2>Sugerir marcações para depósito</h2>
+          <p>
+            Informe quanto vai depositar agora e receba a combinação de números livres que soma exatamente esse valor.
+          </p>
+        </div>
+        <form class="suggestion__form" id="suggestion-form">
+          <label class="input-field">
+            <span>Valor do depósito (R$)</span>
+            <div class="input-wrapper">
+              <span class="prefix">R$</span>
+              <input
+                id="deposit-input"
+                name="deposit"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="Ex.: 25"
+                required
+              />
+            </div>
+          </label>
+          <div class="suggestion__actions">
+            <button type="submit" id="suggest-button" class="btn primary">Sugerir números</button>
+            <button type="button" id="apply-suggestion" class="btn ghost" disabled>Marcar sugeridos</button>
+          </div>
+        </form>
+        <div id="suggestion-result" class="suggestion__result">
+          Nenhuma sugestão ativa. Informe um valor e clique em “Sugerir números”.
+        </div>
+      </section>
+
       <section class="grid-wrap">
         <h2>Valores</h2>
         <div id="grid" class="grid" role="list"></div>
