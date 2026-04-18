@@ -1,7 +1,18 @@
 const TOTAL_SLOTS = 110;
-const TOTAL_SUM = (TOTAL_SLOTS * (TOTAL_SLOTS + 1)) / 2;
 const STORAGE_KEY = 'poupancaChecks';
 const EXTRA_STORAGE_KEY = 'poupancaExtra';
+const GOAL_STORAGE_KEY = 'poupancaMeta';
+
+function loadGoal() {
+  const raw = localStorage.getItem(GOAL_STORAGE_KEY);
+  if (raw !== null) {
+    const parsed = Number.parseInt(raw, 10);
+    if (Number.isFinite(parsed) && parsed > 0) return parsed;
+  }
+  return (TOTAL_SLOTS * (TOTAL_SLOTS + 1)) / 2;
+}
+
+let goalValue = loadGoal();
 
 const grid = document.getElementById('grid');
 const savedValue = document.getElementById('saved-value');
@@ -15,6 +26,10 @@ const manualForm = document.getElementById('manual-form');
 const manualInput = document.getElementById('manual-input');
 const manualStatus = document.getElementById('manual-status');
 const manualResetButton = document.getElementById('manual-reset');
+const goalEditBtn = document.getElementById('goal-edit-btn');
+const goalForm = document.getElementById('goal-form');
+const goalInput = document.getElementById('goal-input');
+const goalCancelBtn = document.getElementById('goal-cancel-btn');
 
 const checkedValues = new Set(loadState());
 let manualValue = loadManualValue();
@@ -97,10 +112,10 @@ function buildGrid() {
 function updateSummary() {
   const saved = Array.from(checkedValues).reduce((total, value) => total + value, 0);
   const totalSaved = saved + manualValue;
-  const remaining = Math.max(TOTAL_SUM - totalSaved, 0);
+  const remaining = Math.max(goalValue - totalSaved, 0);
   const checkedCount = checkedValues.size;
   const remainingCountValue = TOTAL_SLOTS - checkedCount;
-  const percent = Math.min(100, Math.round((totalSaved / TOTAL_SUM) * 100));
+  const percent = Math.min(100, Math.round((totalSaved / goalValue) * 100));
 
   savedValue.textContent = formatCurrency(totalSaved);
   remainingValue.textContent = formatCurrency(remaining);
@@ -111,7 +126,7 @@ function updateSummary() {
 }
 
 function updateTotal() {
-  totalValue.textContent = formatCurrency(TOTAL_SUM);
+  totalValue.textContent = formatCurrency(goalValue);
 }
 
 function toggleValue(value) {
@@ -175,6 +190,36 @@ if (manualResetButton) {
   manualResetButton.addEventListener('click', () => {
     saveManualValue(0);
     updateManualStatus();
+    updateSummary();
+  });
+}
+
+if (goalEditBtn && goalForm) {
+  goalEditBtn.addEventListener('click', () => {
+    goalInput.value = goalValue;
+    goalForm.hidden = false;
+    goalEditBtn.hidden = true;
+    goalInput.focus();
+  });
+}
+
+if (goalCancelBtn) {
+  goalCancelBtn.addEventListener('click', () => {
+    goalForm.hidden = true;
+    goalEditBtn.hidden = false;
+  });
+}
+
+if (goalForm) {
+  goalForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const rawValue = Number.parseInt(goalInput.value, 10);
+    if (!Number.isInteger(rawValue) || rawValue <= 0) return;
+    goalValue = rawValue;
+    localStorage.setItem(GOAL_STORAGE_KEY, String(goalValue));
+    goalForm.hidden = true;
+    goalEditBtn.hidden = false;
+    updateTotal();
     updateSummary();
   });
 }

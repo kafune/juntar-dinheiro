@@ -370,6 +370,46 @@ section.manual {
   }
 }
 
+.btn-goal-edit {
+  display: inline-block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-dark);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 6px;
+  font-family: "Gill Sans", "Trebuchet MS", Verdana, sans-serif;
+  text-decoration: underline;
+  opacity: 0.75;
+}
+
+.btn-goal-edit:hover {
+  opacity: 1;
+}
+
+.goal-form {
+  display: grid;
+  gap: 8px;
+  margin-top: 10px;
+}
+
+.goal-form__input {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.goal-form__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-sm {
+  font-size: 13px;
+  padding: 8px 12px;
+}
+
 @media (max-width: 720px) {
   .hero {
     align-items: flex-start;

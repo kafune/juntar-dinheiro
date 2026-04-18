@@ -24,6 +24,25 @@
           <span>Total</span>
           <strong id="total-value">R$ 0</strong>
           <small>Meta final</small>
+          <button type="button" id="goal-edit-btn" class="btn-goal-edit">Alterar meta</button>
+          <form id="goal-form" class="goal-form" hidden>
+            <div class="input-wrapper goal-form__input">
+              <span class="prefix">R$</span>
+              <input
+                id="goal-input"
+                type="number"
+                inputmode="numeric"
+                min="1"
+                step="1"
+                placeholder="Ex.: 6055"
+                required
+              />
+            </div>
+            <div class="goal-form__actions">
+              <button type="submit" class="btn primary btn-sm">Salvar</button>
+              <button type="button" id="goal-cancel-btn" class="btn ghost btn-sm">Cancelar</button>
+            </div>
+          </form>
         </div>
       </header>
 
